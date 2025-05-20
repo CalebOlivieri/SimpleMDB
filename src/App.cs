@@ -18,14 +18,21 @@ public class App
         Console.WriteLine("Server Listening on..." + host);
 
         var userRepository = new MockUserRepository();
-        var userService = new MockUserService(userRepository); 
+        var userService = new MockUserService(userRepository);
         var authController = new AuthController(userService);
-        var userController = new UserController(userService); 
+        var userController = new UserController(userService);
 
         router = new HttpRouter();
+        router.Use(HttpUtils.ReadRequestFormData);
 
         router.AddGet("/", authController.LandingPageGet);
         router.AddGet("/users", userController.ViewAllGet);
+        router.AddGet("/user/add", userController.AddGet);
+        router.AddPost("/user/add", userController.AddPost);
+        router.AddGet("/user/view", userController.ViewGet);
+        router.AddGet("/user/edit", userController.EditGet);
+        router.AddPost("/user/edit", userController.EditPost);
+        router.AddGet("/user/remove", userController.RemoveGet);
     }
 
     public async Task Start()
@@ -52,6 +59,5 @@ public class App
         var options = new Hashtable();
 
         await router.Handle(req, res, options);
-        
     }
 }

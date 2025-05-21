@@ -7,13 +7,18 @@ namespace SimpleMDB;
 public class AuthController
 {
     private IUserService userService;
+
     public AuthController(IUserService userService)
     {
-        this.userService = userService; 
+        this.userService = userService;
     }
+
     public async Task LandingPageGet(HttpListenerRequest req, HttpListenerResponse res, Hashtable options)
     {
-        string html = $@"
+        // Define a message (can be dynamic if needed, e.g., from query string)
+        string message = ""; // Or req.QueryString["message"] ?? ""; if you want to pass messages to the landing page
+
+        string htmlContent = $@"
         <nav>
         <ul>
         <li><a href=""/register"">Register</a></li>
@@ -26,7 +31,10 @@ public class AuthController
         </nav>
         ";
 
-        string content = HtmlTemplates.Base("SimpleMDB", "Landing Page", html);
-        await HttpUtils.Respond(req, res, options, (int)HttpStatusCode.OK, html);
+        
+        string content = HtmlTemplates.Base("SimpleMDB", "Landing Page", htmlContent, message);
+
+        
+        await HttpUtils.Respond(req, res, options, (int)HttpStatusCode.OK, content);
     }
 }

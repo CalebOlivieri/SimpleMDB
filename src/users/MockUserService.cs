@@ -20,9 +20,17 @@ public class MockUserService : IUserService
         return result;
     }
 
-    public async Task<Result<User>> Create(User user)
+    public async Task<Result<User>> Create(User newUser)
     {
-        User? createdUser = await userRepository.Create(user);
+        if (string.IsNullOrWhiteSpace(newUser.Username))
+        {
+            return new Result<User>(new Exception("Username cannot be empty"));
+        }
+       else if (newUser.Username.Length > 16)
+        {
+            return new Result<User>(new Exception("Username cannot be more than 16 characters."));
+        }
+        User? createdUser = await userRepository.Create(newUser);
 
         var result = (createdUser == null) ?
             new Result<User>(new Exception("User could not be created")) :

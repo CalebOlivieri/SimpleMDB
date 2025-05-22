@@ -81,4 +81,10 @@ public class MockUserRepository : IUserRepository
 
         return await Task.FromResult(user);
     }
+    public async Task<User?> GetUserByUsername(string username)
+    {
+        User? user = users.FirstOrDefault((u) => u.Username == username);
+
+        return await Task.FromResult(user);
+    }
 }

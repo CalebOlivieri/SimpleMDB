@@ -13,8 +13,8 @@ public class HtmlTemplates
         <head>
         <title>{title}</title>
         <link rel=""icon"" type=""image/x-icon"" href=""favicon.png"">
-        <link rel=""stylesheet"" type=""text/css"" href=""styles/main.css"">
-        <script type=""text/javascript"" src=""scripts/main.js"" defer></script>
+        <link rel=""stylesheet"" type=""text/css"" href=""/styles/main.css"">
+        <script type=""text/javascript"" src=""/scripts/main.js"" defer></script>
         </head>
         <body>
             <h1 class=""header"">{header}</h1>

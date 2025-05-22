@@ -77,6 +77,6 @@ public class MockActorService : IActorService
             new Result<Actor>(new Exception("Actor could not be deleted")) :
             new Result<Actor>(actor);
 
-        return result;
+        return await Task.FromResult(result);
     }
 }

@@ -80,20 +80,20 @@ public class MockActorMovieRepository : IActorMovieRepository
         return pagedResult.Values;
     }
 
-    public async Task Create(int actorId, int movieId, string roleName)
-    {
-        var actorMovie = new ActorMovie(idCount++, actorId, movieId, roleName);
-        actorMovies.Add(actorMovie);
-        await Task.CompletedTask;
-    }
+public async Task<ActorMovie> Create(int actorId, int movieId, string roleName)
+{
+    var actorMovie = new ActorMovie(idCount++, actorId, movieId, roleName);
+    actorMovies.Add(actorMovie);
+    return await Task.FromResult(actorMovie);
+}
 
-    public async Task Delete(int id)
-    {
-        var actorMovie = actorMovies.FirstOrDefault(am => am.Id == id);
-        if (actorMovie != null)
-        {
-            actorMovies.Remove(actorMovie);
-        }
-        await Task.CompletedTask;
-    }
+public async Task<ActorMovie?> Delete(int id)
+{
+    var actorMovie = actorMovies.FirstOrDefault(am => am.Id == id);
+    if (actorMovie != null)
+    {
+        actorMovies.Remove(actorMovie);
+    }
+    return await Task.FromResult(actorMovie);
+}
 }

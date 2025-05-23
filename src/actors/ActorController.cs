@@ -159,7 +159,7 @@ public class ActorController
         {
             HttpUtils.AddOptions(options, "redirect", "message", result.Error!.Message);
 
-            await HttpUtils.Redirect(req, res, options, "/actor/edit");
+            await HttpUtils.Redirect(req, res, options, $"/actor/edit?aid={aid}");
         }
     }
 

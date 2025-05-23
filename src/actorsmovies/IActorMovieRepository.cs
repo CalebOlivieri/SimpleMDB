@@ -7,6 +7,9 @@ public interface IActorMovieRepository
     public Task<List<Actor>> ReadAllActors();
     public Task<List<Movie>> ReadAllMovies();
     
-    public Task Create(int actoroId, int movieId, string roleName);
-    public Task Delete(int actorMovieId);
+    // CHANGE THIS LINE: It MUST return Task<ActorMovie>
+    public Task<ActorMovie> Create(int actorId, int movieId, string roleName); 
+    
+    // CHANGE THIS LINE: It MUST return Task<ActorMovie?>
+    public Task<ActorMovie?> Delete(int actorMovieId);
 }
